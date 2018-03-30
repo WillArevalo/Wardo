@@ -1,1 +1,3 @@
 # Wardo - Ecommerce
+
+Requiremnts: Django
