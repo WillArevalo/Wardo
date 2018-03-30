@@ -1,0 +1,32 @@
+{% extends 'products/base.html' %}
+{% load staticfiles %}
+{% block css %}
+  <link href="{% static "css/3-col-portfolio.css" %}" rel="stylesheet">
+  <style>
+    div.container{
+
+    }
+  </style>
+{% endblock css%}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col"></div>
+    <div class="col">
+      <br>
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><button class="btn btn-outline-info" type="submit">Login</button></p>
+  </form>
+<p><small>Si no estas logueado registrate aqui</small></p>
+<a class="btn btn-outline-warning" href="{% url "accounts:signup" %}">Signup</a>
+
+</div>
+<div class="col"></div>
+</div>
+</div>
+{% endblock %}

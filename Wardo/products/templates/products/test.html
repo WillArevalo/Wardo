@@ -9,5 +9,8 @@
 </style>
 {% endblock %}
 {% block content %}
-<h1>Hello</h1>
+<h1>Hello {{user.username}}</h1>
+<a class="btn btn-outline-success" href="{% url "accounts:login" %}?next={{request.path}}">Log in</a>
+<a class="btn btn-outline-danger" href="{% url "accounts:logout" %}">Log out</a>
+{# next apunta a la siguiente url luego de estar en esa pagina #}
 {% endblock %}
