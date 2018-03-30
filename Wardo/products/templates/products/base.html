@@ -37,15 +37,12 @@
             <li class="nav-item">
               <a class="nav-link" href="#"></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"></a>
-            </li>
             {% if request.user.is_authenticated%}
             <li class="nav-item">
-              {{request.user.username}}<a class="nav-link" href="{% url "accounts:logout" %}">logout</a>
+              <a class="nav-link text-muted" href="#">{{request.user.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "accounts:logout" %}">logout</a>
             </li>
             {% else %}
             <li class="nav-item">

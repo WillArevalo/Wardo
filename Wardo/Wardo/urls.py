@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='products/test.html'), name="home"),
+    path('', include("products.urls")),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace="accounts")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
+
+# + static nos permite servir archivos estaticos como imagenes
