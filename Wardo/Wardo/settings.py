@@ -127,5 +127,6 @@ LOGIN_REDIRECT_URL = 'home'
 STATIC_URL = '/static/'
 
 #Keys Stripe
-STRIPE_API_KEY = 'sk_test_stAxfArcK8VzSPv6uqIMyDZW'
-STRIPE_PUBLIC_API_KEY = 'pk_test_SnqbRnvqT3lLPv7h5EFuihVN'
+
+STRIPE_API_KEY = "sk_test_stAxfArcK8VzSPv6uqIMyDZW"
+STRIPE_PUBLIC_API_KEY = "pk_test_SnqbRnvqT3lLPv7h5EFuihVN"
