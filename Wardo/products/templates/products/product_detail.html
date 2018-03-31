@@ -45,15 +45,31 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-              
+              <form method="post" action="{% url "comments:createcomment" %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <textarea name="{{comment_form.content.name}}" class="form-control" rows="3"></textarea>
+                  <input type="hidden" name="{{comment_form.product.name}}" value="{{product.id}}">
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+              </form>
             </div>
           </div>
           {% endif %}
 
           <!-- Single Comment -->
+          {% for comment in product.comments.all reversed %}
           <div id="0" class="media mb-4">
             
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/80x80" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">{{comment.author.username}}</h5>
+              <span>{{comment.content}}</span>
+              <p><small>{{comment.updated_at}}</small></p>
+            </div>
+            
           </div>
+          {% endfor %}
 
         </div>
 

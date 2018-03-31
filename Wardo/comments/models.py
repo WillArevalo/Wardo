@@ -1,15 +1,26 @@
 from django.db import models
 from django.conf import settings
 
+
 # Create your models here.
 class Comment(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
-	updated = models.DateTimeField(auto_now=True)
+	updated_at = models.DateTimeField(auto_now=True)
 	content = models.TextField()
 	author = models.ForeignKey(
 		settings.AUTH_USER_MODEL,
 		on_delete=models.CASCADE,
 		related_name='comments'
+	)
+
+	#Relacion entre producto y comentarios
+	#Primer param el modelo al que lo vamos a asociar
+	#segundo param related name
+	#tercer param on_delete=
+	product = models.ForeignKey(
+		'products.Product',
+		related_name='comments',
+		on_delete=models.CASCADE,
 	)
 
 	def __str__(self):
