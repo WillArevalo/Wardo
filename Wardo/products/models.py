@@ -5,9 +5,10 @@ class Product(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	title = models.CharField(max_length=255)
-	description = models.CharField(max_length=255)
+	description = models.TextField(max_length=255)
 	price = models.IntegerField()
 	slug = models.SlugField()
+	categories = models.ManyToManyField('products.ProduCategory')
 
 	def __str__(self):
 		return self.title
