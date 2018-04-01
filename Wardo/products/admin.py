@@ -1,5 +1,10 @@
 from django.contrib import admin
-from products.models import Product, ProductImage, ProduCategory
+from products.models import (
+	Product, 
+	ProductImage, 
+	ProduCategory,
+	LogBuy,
+)
 
 # Register your models here.
 #Administraremos los sgtes models
@@ -20,3 +25,4 @@ class ProductAdmin(admin.ModelAdmin):
 #Registramos
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProduCategory)
+admin.site.register(LogBuy)
