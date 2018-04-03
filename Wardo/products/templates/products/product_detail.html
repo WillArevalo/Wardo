@@ -80,12 +80,15 @@
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
             <div class="card-body">
+              <form class="form-inline my-2 my-lg-0" method="post" action="{% url "searchresult" %}">
+                {% csrf_token %}
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input name="{{search_form.title.name}}" type="search" class="form-control" placeholder="Search for..." aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button">Go!</button>
+                  <button class="btn btn-outline-secondary" type="submit">Go!</button>
                 </div>
               </div>
+              </form>
             </div>
           </div>
 

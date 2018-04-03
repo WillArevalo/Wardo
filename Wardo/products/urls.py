@@ -3,10 +3,13 @@ from products.views import (
 	HomeView, 
 	ProductDetailView,
 	ProductBuyView,
+	search_result,
 )
 
 urlpatterns = [
 	path("", HomeView.as_view(),name="home"),
+	path('products/search/', search_result, name="searchresult"),
 	path("products/<slug:slug>/", ProductDetailView.as_view(),name="detail"),
 	path("products/<slug:slug>/buy/", ProductBuyView.as_view(),name="buy"),
+
 ]

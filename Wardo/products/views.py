@@ -1,18 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DetailView
 from products.models import Product, LogBuy
 from comments.forms import CommentForm
+from products.forms import SearchForm
+from django.http import HttpResponseNotFound
 import stripe
 from django.conf import settings
 # Create your views here.
+#vista del search
+def search_result(request):
+	form = SearchForm(request.POST)
+
+	if form.is_valid():
+		#trae el formulario sin guardarlo
+		resultSearch = form.save(commit=False)
+		queryResult = resultSearch.title
+		products = Product.objects.filter(title__icontains=queryResult)
+		return render(request, "products/search.html", {'products':products, 'queryResult':queryResult})
+	else:	
+		return HttpResponseNotFound("<h1>Your search is incorrect</h1>")
+			
+
 #vista de home en products
 class HomeView(TemplateView):
 	template_name='products/home.html'
 
 	#le pasamos en el contexto todos los productos
 	def get_context_data(self, *args, **kwargs):
+		search_form = SearchForm()
 		products = Product.objects.all()
-		return {'products': products}
+		return {'products': products, 'search_form':search_form}
 
 #vista para detalle del prodcuto
 #solo si pongo el nombre del template con un guin bajo y detail
