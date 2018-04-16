@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DetailView
-from products.models import Product, LogBuy
+from products.models import Product, LogBuy, ProduCategory
 from comments.forms import CommentForm
 from products.forms import SearchForm
 from django.http import HttpResponseNotFound
@@ -29,7 +29,8 @@ class HomeView(TemplateView):
 	def get_context_data(self, *args, **kwargs):
 		search_form = SearchForm()
 		products = Product.objects.all()
-		return {'products': products, 'search_form':search_form}
+		category = ProduCategory.objects.all()
+		return {'products': products, 'search_form':search_form, 'categories':category}
 
 #vista para detalle del prodcuto
 #solo si pongo el nombre del template con un guin bajo y detail
@@ -43,6 +44,25 @@ class ProductDetailView(DetailView):
 		comment_form = CommentForm()
 		context['comment_form'] = comment_form
 		return context
+
+
+class CategoryView(TemplateView):
+
+	template_name = 'products/home.html'
+
+	def get_context_data(self, *args, **kwargs):
+		
+		try:
+			categoryall = ProduCategory.objects.all()
+			category = ProduCategory.objects.get(name=kwargs['category'])
+			productfilter = Product.objects.filter(categories=category)
+		except category.DoesNotExist as e:
+			raise Http404('The Category {} does no exist'.format(kwargs['category']))
+		else:
+			pass
+		finally:
+			pass
+		return {'products' : productfilter, 'categories': categoryall}
 
 class ProductBuyView(DetailView):
 	model = Product

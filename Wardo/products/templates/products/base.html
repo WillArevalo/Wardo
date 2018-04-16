@@ -21,7 +21,7 @@
 
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(120, 194, 173,0.7);">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(120, 194, 173,0.8);">
       <div class="container">
         <a class="navbar-brand text-white" href="/">Wardo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
             <form class="form-inline my-2 my-lg-0" method="post" action="{% url "searchresult" %}">
               {% csrf_token %}
               <input name="{{search_form.title.name}}" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+              <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
             {% if request.user.is_authenticated%}
             <li class="nav-item">

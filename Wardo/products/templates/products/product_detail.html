@@ -100,7 +100,7 @@
                   <ul class="list-unstyled mb-0">
                     {% for category in product.categories.all %}
                     <li>
-                      <a href="#">{{category.name|capfirst}}</a>
+                      <a href="{% url "categories" category=category.name %}">{{category.name|capfirst}}</a>
                     </li>
                     {% endfor %}
                   </ul>

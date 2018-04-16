@@ -14,10 +14,25 @@
     <div class="container">
 
       <!-- Page Heading -->
+      <br>
+      <h1 class="lead">Your Store in 1 Click.</h1>
       <h1 class="my-4">Products
         <!-- <small>buy one</small> -->
       </h1>
-
+      
+      <ul class="nav nav-pills nav-fill">
+        {% for category in categories %}
+        {% url "categories" category=category.name as the_url %}
+        <li class="nav-item">
+          {% ifequal request.path the_url %}
+          <a class="nav-link active" href="{{the_url}}">{{category.name|capfirst}}</a>
+          {% else %}
+          <a class="nav-link" href="{{the_url}}">{{category.name|capfirst}}</a>
+          {% endifequal %}
+        </li>
+        {% endfor %}
+      </ul>
+      <br>
       {% for product in products %}
       {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:"3" %}
       </div>
@@ -27,7 +42,7 @@
       {% endif %}
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="{{product.get_absolute_url}}"><img class="card-img-top" src="{{product.images.first.image.url}}" alt=""></a>
+          <a href="{{product.get_absolute_url}}" style="align-self: center"><img class="" src="{{product.images.first.image.url}}" style="max-height: 200px; max-width:100% !important; display:block; " alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="{{product.get_absolute_url}}">{{product.title}}</a>
