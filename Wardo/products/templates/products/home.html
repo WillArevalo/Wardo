@@ -20,7 +20,7 @@
         <!-- <small>buy one</small> -->
       </h1>
       
-      <ul class="nav nav-pills nav-fill">
+      <ul class="nav nav-tabs">
         {% for category in categories %}
         {% url "categories" category=category.name as the_url %}
         <li class="nav-item">

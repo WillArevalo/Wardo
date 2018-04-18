@@ -12,7 +12,6 @@
 
         <!-- Post Content Column -->
         <div class="col-lg-8">
-
           <!-- Title -->
           <h1 class="mt-4">{{product.title}}</h1>
 
@@ -29,13 +28,60 @@
 
           <hr>
 
-          <!-- Preview Image -->
-          <img class="img-fluid rounded" src="{{product.images.first.image.url}}" alt="">
-
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="tab-content" id="nav-tabContent">
+                {% for imagen in product.images.all %}
+                  {% if forloop.counter ==  1 %}
+                    <div class="tab-pane fade show active" id="list-img-{{ forloop.counter }}" role="tabpanel" aria-labelledby="img-list-{{ forloop.counter }}">
+                      <img class="img-fluid rounded" src="{{imagen.image.url}}" alt="" style="max-height: 400px;">
+                    </div> 
+                  {% else %}
+                    <div class="tab-pane fade show" id="list-img-{{ forloop.counter }}" role="tabpanel" aria-labelledby="img-list-{{ forloop.counter }}">
+                      <img class="img-fluid rounded" src="{{imagen.image.url}}" alt="" style="max-height: 400px;">
+                    </div>   
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="list-group" id="list-tab" role="tablist">
+                {% for imagen in product.images.all %}
+                  {% if forloop.counter ==  1 %}
+                    <a class="list-group-item list-group-item-action active" id="img-list-{{ forloop.counter }}" data-toggle="list" href="#list-img-{{ forloop.counter }}" role="tab" aria-controls="img-{{ forloop.counter }}">
+                      <img class="img-fluid rounded" src="{{imagen.image.url}}" alt="" style="max-height: 100px;max-width: 100px;">
+                    </a>
+                  {% else %}
+                    <a class="list-group-item list-group-item-action" id="img-list-{{ forloop.counter }}" data-toggle="list" href="#list-img-{{ forloop.counter }}" role="tab" aria-controls="img-{{ forloop.counter }}">
+                      <img class="img-fluid rounded" src="{{imagen.image.url}}" alt="" style="max-height: 100px;max-width: 100px;">
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
           <hr>
-
+            
           <!-- Post Content -->
-          <p class="lead">{{product.description|capfirst}}</p>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Features</a>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                  <p class="lead">{{product.description|capfirst}}</p>
+                </div>
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list"><p>Features of all items</p></div>
+                {% for imagen in product.images.all %}
+                  
+                {% endfor %}
+              </div>
+            </div>
+          </div>
 
           <hr>
 
@@ -55,6 +101,8 @@
               </form>
             </div>
           </div>
+          {% else %}
+          <p>If you want comment, please signin.</p>
           {% endif %}
 
           <!-- Single Comment -->
